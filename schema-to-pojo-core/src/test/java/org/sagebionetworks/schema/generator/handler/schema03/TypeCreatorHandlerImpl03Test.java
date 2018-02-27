@@ -322,7 +322,6 @@ public class TypeCreatorHandlerImpl03Test {
 		assertTrue(clazz instanceof JDefinedClass);
 		JDefinedClass sampleClass = (JDefinedClass)clazz;
 		String classString = declareToString(sampleClass);
-		assertTrue(classString.indexOf("public final static java.lang.String EFFECTIVE_SCHEMA") > 0);
 	}
 	
 	

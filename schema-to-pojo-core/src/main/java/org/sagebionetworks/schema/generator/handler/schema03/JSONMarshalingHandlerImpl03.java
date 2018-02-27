@@ -38,8 +38,7 @@ public class JSONMarshalingHandlerImpl03 implements JSONMarshalingHandler{
 		}
 		// Make sure this class implements JSONEntity
 		classType._implements(JSONEntity.class);
-		createGetJSONSchemaMethod(classType);
-
+		
 		// Create a field to handle overflow from newer type definitions
 		JFieldVar extraFields = createMissingFieldField(classType);
 
@@ -57,25 +56,6 @@ public class JSONMarshalingHandlerImpl03 implements JSONMarshalingHandler{
 				ObjectSchema.EXTRA_FIELDS, JExpr._null());
 		return extraFields;
 	}
-	
-	/**
-	 * Create the getJSONSchema method.
-	 * 
-	 * @param classSchema
-	 * @param classType
-	 */
-	public JMethod createGetJSONSchemaMethod(JDefinedClass classType) {
-		// Look up the field for this property
-		JFieldVar field = classType.fields().get(JSONEntity.EFFECTIVE_SCHEMA);
-		if (field == null)
-			throw new IllegalArgumentException("Failed to find the JFieldVar for property: '"+ JSONEntity.EFFECTIVE_SCHEMA + "' on class: " + classType.name());
-		// Create the get method
-		JMethod method = classType.method(JMod.PUBLIC, classType.owner()._ref(String.class), "getJSONSchema");
-		method.body()._return(field);
-		return method;
-	}
-
-
 
 	/**
 	 * 
@@ -138,7 +118,7 @@ public class JSONMarshalingHandlerImpl03 implements JSONMarshalingHandler{
 					+ classType.name());
 		}
 		body.assign(extraFields, invocation);
-        
+		
 		// Now process each property
 		Map<String, ObjectSchema> fieldMap = classSchema.getObjectFieldMap();
 		Iterator<String> keyIt = fieldMap.keySet().iterator();

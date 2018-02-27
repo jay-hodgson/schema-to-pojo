@@ -45,8 +45,6 @@ public class ABImplTest {
 		assertTrue(a.equals(b));
 		
 		JSONAdapter adapter = a.writeToJSONObject(new JSONObjectAdapterImpl());
-		
-		ObjectSchema schema = new ObjectSchema(new JSONObjectAdapterImpl(a.getJSONSchema()));
 	}
 	
 	@Test
@@ -71,20 +69,4 @@ public class ABImplTest {
 
 		assertEquals(impl, clone);
 	}
-	
-	@Test
-	public void testGetJSONSchema() throws JSONObjectAdapterException{
-		ABImpl impl = new ABImpl();
-		String json = impl.getJSONSchema();
-		System.out.println(json);
-		assertNotNull(json);
-		ObjectSchema schema = new ObjectSchema(new JSONObjectAdapterImpl(json));
-		assertNotNull(schema);
-		assertNotNull(schema.getProperties());
-		assertNotNull(schema.getProperties().get("alsoFromInterfaceA"));
-		assertNotNull(schema.getProperties().get("alsoFromInterfaceB"));
-		assertNotNull(schema.getProperties().get("fromInterfaceB"));
-		assertNotNull(schema.getProperties().get("fromInterfaceA"));
-	}
-
 }

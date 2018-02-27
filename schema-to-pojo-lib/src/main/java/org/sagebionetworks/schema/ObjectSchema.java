@@ -2316,12 +2316,6 @@ public class ObjectSchema implements JSONEntity {
 		}
 	}
 
-	@Override
-	public String getJSONSchema() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/**
 	 * Set's a adapter's default
 	 * 

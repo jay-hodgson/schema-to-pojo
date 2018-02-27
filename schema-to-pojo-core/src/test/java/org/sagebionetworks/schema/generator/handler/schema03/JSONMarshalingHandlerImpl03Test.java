@@ -140,19 +140,6 @@ public class JSONMarshalingHandlerImpl03Test {
 	}
 
 	@Test
-	public void testCreateGetJSONSchemaMethod(){
-		JSONMarshalingHandlerImpl03 handler = new JSONMarshalingHandlerImpl03();
-		sampleClass.field(JMod.PUBLIC | JMod.STATIC | JMod.FINAL, sampleClass.owner()._ref(String.class), JSONEntity.EFFECTIVE_SCHEMA);
-		JMethod getMethod = handler.createGetJSONSchemaMethod(sampleClass);
-		assertNotNull(getMethod);
-		assertEquals(JMod.PUBLIC, getMethod.mods().getValue());
-		assertNotNull(getMethod.params());
-		assertEquals(0, getMethod.params().size());
-		String methodString = declareToString(getMethod);
-		assertTrue(methodString.indexOf("return EFFECTIVE_SCHEMA;") > 0);
-	}
-	
-	@Test
 	public void testCreateBaseMethod() throws JClassAlreadyExistsException {
 		// For this case we want to use class that has the sample as a base class
 		// Now handle the
@@ -588,8 +575,6 @@ public class JSONMarshalingHandlerImpl03Test {
 		// Now get the string and check it.
 		String methodString = declareToString(constructor);
 		System.out.println(methodString);
-		// Is the primitive assigned correctly?
-		assertTrue(methodString.indexOf("org.sagebionetworks.schema.ObjectValidator.validateEntity(Sample.EFFECTIVE_SCHEMA, adapter, Sample.class);") > 0);
 	}
 	
 	@Test

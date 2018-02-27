@@ -198,21 +198,6 @@ public class ObjectValidatorTest {
 		assertNull(undefinedEntries);
 	}
 	
-	
-	@Test
-	public void testNonDeclaredValue() throws JSONObjectAdapterException{
-		AllTypes at = new AllTypes();
-		at.setBooleanProp(true);
-		at.setLongProp(123L);
-		JSONObjectAdapterImpl adapter = new JSONObjectAdapterImpl();
-		at.writeToJSONObject(adapter);
-		// Now add an undeclared property to the object
-		adapter.put("NOT DECLARED", "I should not be here");
-		// This should return the undeclared fiels
-		Map<String, Object> undefinedEntries = ObjectValidator.validateEntity(at.getJSONSchema(), adapter, AllTypes.class);
-		assertEquals(Collections.singletonMap("NOT DECLARED", "I should not be here"), undefinedEntries);
-	}
-	
 	@Test
 	public void testNonDeclaredValueOnInit() throws Exception {
 		AllTypes at = new AllTypes();
